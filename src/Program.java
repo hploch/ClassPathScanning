@@ -1,6 +1,4 @@
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -21,9 +19,8 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
-import org.xml.sax.InputSource;
 
-public class Programm {
+public class Program {
 
 	static class MyClassVisitor extends ClassVisitor {
 
@@ -42,7 +39,7 @@ public class Programm {
 		public AnnotationVisitor visitAnnotation(String name, boolean arg1) {
 			
 			if (name.equals(Type.getType(Service.class).getDescriptor())){
-				System.err.println("annotation presend");
+				System.err.println("annotation present");
 			}
 			
 			return null;
@@ -90,7 +87,7 @@ public class Programm {
 	public static void main(String[] args) {
 		
 		
-		for (URL url : Programm.getUrls()) {
+		for (URL url : Program.getUrls()) {
 			
 			Path path = null;
 			try {
