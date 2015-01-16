@@ -71,11 +71,13 @@ public class Program {
 				if (Files.isDirectory(path)) {
 					scanDirectory(path);
 				} else {
-					try (InputStream stream =  new BufferedInputStream(Files.newInputStream(path))) {
-						ClassReader classReader = new ClassReader(stream);
-						classReader.accept(new MyClassVisitor(), 0);
-					} catch (IOException e) {
-						e.printStackTrace();
+					if (path.getFileName().toString().endsWith(".class")) {
+						try (InputStream stream =  new BufferedInputStream(Files.newInputStream(path))) {
+							ClassReader classReader = new ClassReader(stream);
+							classReader.accept(new MyClassVisitor(), 0);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}						
 					}
 				}
 			}
@@ -93,7 +95,6 @@ public class Program {
 			try {
 				path = Paths.get(url.toURI());
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
